@@ -1,6 +1,6 @@
 "use client";
 
-import { EventCard } from "@/components/cards/event-card";
+import { EventCard } from "@/components/shared/cards/event-card";
 import type { Event } from "@/lib/data";
 import { AnimatePresence, LayoutGroup, motion } from "framer-motion";
 import { useMemo, useState } from "react";

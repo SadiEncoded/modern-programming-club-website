@@ -115,7 +115,7 @@ export const SiteFooter = () => (
             © {new Date().getFullYear()} {BRANDING.name}
           </p>
           <p className="text-[9px] text-muted-foreground/60 font-medium tracking-tight">
-            ALL RIGHTS RESERVED · VERSION 3.0
+            ALL RIGHTS RESERVED · VERSION 1.0
           </p>
         </div>
 

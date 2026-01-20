@@ -1,4 +1,4 @@
-import { EventCard } from "@/components/cards/event-card";
+import { EventCard } from "@/components/shared/cards/event-card";
 import { SectionTitle } from "@/components/shared/section-title";
 import { getEvents } from "@/lib/data";
 
