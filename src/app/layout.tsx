@@ -35,7 +35,34 @@ export const metadata: Metadata = {
   description:
     "Official portal for events, contests, projects, and community of the top programming club at Daffodil International College.",
 
+  keywords: [
+    "DICPC",
+    "Daffodil International College",
+    "Programming Club",
+    "Competitive Programming",
+    "Software Development",
+    "Student Community",
+    "Coding Contests",
+    "Bangladesh Tech",
+  ],
+
   metadataBase: new URL("https://dicpc.club"),
+
+  alternates: {
+    canonical: "/",
+  },
+
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      "max-video-preview": -1,
+      "max-image-preview": "large",
+      "max-snippet": -1,
+    },
+  },
 
   icons: {
     icon: [
@@ -64,7 +91,15 @@ export const metadata: Metadata = {
         alt: "DICPC Open Graph Image",
       },
     ],
+    locale: "en_US",
     type: "website",
+  },
+
+  twitter: {
+    card: "summary_large_image",
+    title: "DICPC — Daffodil International College Programming Club",
+    description: "Official portal for events, contests, projects, and community of DICPC.",
+    images: ["/og.png"],
   },
 };
 
