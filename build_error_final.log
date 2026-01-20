@@ -1,0 +1,21 @@
+Γû▓ Next.js 16.1.4 (Turbopack)
+- Environments: .env.local
+
+  Creating an optimized production build ...
+Γ£ô Compiled successfully in 5.0s
+  Running TypeScript ...
+Failed to compile.
+
+./src/lib/data/team.ts:8:10
+Type error: Conversion of type '{ skills: string[]; id: string; name: string; department: string; batch: string; role: string; profileImage: string; codeforcesId?: string | undefined; leetcodeId?: string | undefined; github?: string | undefined; }[]' to type 'TeamMemberWithSkills[]' may be a mistake because neither type sufficiently overlaps with the other. If this was intentional, convert the expression to 'unknown' first.
+  Type '{ skills: string[]; id: string; name: string; department: string; batch: string; role: string; profileImage: string; codeforcesId?: string; leetcodeId?: string; github?: string; }' is not comparable to type 'TeamMemberWithSkills'.
+    Type '{ skills: string[]; id: string; name: string; department: string; batch: string; role: string; profileImage: string; codeforcesId?: string | undefined; leetcodeId?: string | undefined; github?: string | undefined; }' is missing the following properties from type '{ id: string; name: string; role: string; department: "Leadership" | "Technical" | "Operations" | "Design"; bio: string | null; image_url: string | null; semester: string | null; phone: string | null; ... 7 more ...; updated_at: string; }': bio, image_url, semester, phone, and 8 more.
+
+   6 |  */
+   7 | export async function getTeamMembers(): Promise<TeamMemberWithSkills[]> {
+>  8 |   return mockMembers.map(member => ({
+     |          ^
+   9 |     ...member,
+  10 |     skills: member.skills || []
+  11 |   })) as TeamMemberWithSkills[];
+Next.js build worker exited with code: 1 and signal: null

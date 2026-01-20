@@ -1,0 +1,19 @@
+Γû▓ Next.js 16.1.4 (Turbopack)
+- Environments: .env.local
+
+  Creating an optimized production build ...
+Γ£ô Compiled successfully in 6.2s
+  Running TypeScript ...
+Failed to compile.
+
+./src/lib/data/index.ts:48:3
+Type error: Type '""' is not assignable to type '"Leadership" | "Technical" | "Operations" | "Design"'.
+
+  46 |   id: row.id,
+  47 |   name: row.name, // Already mapped from full_name in view
+> 48 |   department: "", // Will need to join with departments table
+     |   ^
+  49 |   batch: "", // Will need to join with sessions table
+  50 |   role: row.role,
+  51 |   skills: [], // Not in current schema
+Next.js build worker exited with code: 1 and signal: null
