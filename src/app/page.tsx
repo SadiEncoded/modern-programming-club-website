@@ -4,9 +4,6 @@ import { EventsPreview } from "@/components/sections/home/events-preview";
 import { Hero } from "@/components/sections/home/hero";
 import { SocialProof } from "@/components/sections/home/social-proof";
 import { ThreePillars } from "@/components/sections/home/three-pillars";
-// import { AboutPreview } from "@/components/sections/home/about-preview";
-// import { MembersPreview } from "@/components/sections/home/members-preview";
-// import { ProjectsPreview } from "@/components/sections/home/projects-preview";
 import { Container } from "@/components/shared/container";
 import { getEvents, type Event } from "@/lib/data";
 import { motion } from "framer-motion";
@@ -52,11 +49,6 @@ export default function Home() {
       <motion.div variants={{ hidden: { opacity: 0, y: 20 }, show: { opacity: 1, y: 0 } }}>
         <Container className="py-12">
           <EventsPreview events={events} />
-          
-          {/* Under-construction sections hidden for minimal version */}
-          {/* <AboutPreview /> */}
-          {/* <MembersPreview /> */}
-          {/* <ProjectsPreview /> */}
         </Container>
       </motion.div>
     </motion.main>

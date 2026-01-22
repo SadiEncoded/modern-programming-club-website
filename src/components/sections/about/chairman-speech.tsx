@@ -32,19 +32,19 @@ In short, by breaking free from misguided influences and pivoting toward Innovat
   };
 
   return (
-    <section className="py-16 px-4 sm:px-6 lg:px-8 bg-background">
+    <section className="py-12 sm:py-16 px-4 sm:px-6 lg:px-8 bg-background">
       <div className="max-w-7xl mx-auto">
-        <div className="flex flex-col md:flex-row justify-between items-center mb-10 gap-6">
+        <div className="flex flex-col md:flex-row justify-between items-center mb-8 sm:mb-10 gap-6">
           <motion.div
             initial={{ opacity: 0, x: -20 }}
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
             className="text-center md:text-left"
           >
-            <span className="text-[10px] font-black uppercase tracking-[0.3em] text-primary mb-4 block">
+            <span className="text-[9px] sm:text-[10px] font-black uppercase tracking-[0.3em] text-primary mb-3 sm:mb-4 block">
               {CHAIRMAN_SPEECH_DATA.eyebrow}
             </span>
-            <h2 className="text-3xl md:text-5xl font-black text-foreground mb-4" style={{ fontFamily: "var(--font-orbitron), sans-serif" }}>
+            <h2 className="text-2xl sm:text-3xl md:text-5xl font-black text-foreground mb-4" style={{ fontFamily: "var(--font-orbitron), sans-serif" }}>
               <TechText text={CHAIRMAN_SPEECH_DATA.title} glitchInterval={8000} />
             </h2>
           </motion.div>
@@ -78,7 +78,7 @@ In short, by breaking free from misguided influences and pivoting toward Innovat
             whileInView={{ opacity: 1, scale: 1 }}
             viewport={{ once: true }}
             transition={{ duration: 0.6 }}
-            className="relative"
+            className="relative max-w-sm mx-auto lg:max-w-none"
           >
             <div className="relative aspect-[3/4] rounded-2xl overflow-hidden border border-border shadow-xl">
               <Image
@@ -106,26 +106,26 @@ In short, by breaking free from misguided influences and pivoting toward Innovat
             transition={{ duration: 0.4 }}
             className="lg:order-2"
           >
-            <div className="relative p-8 md:p-12 bg-card border border-border shadow-sm rounded-r-lg group">
-              {/* Vertical Lead Line */}
-              <div className="absolute left-0 top-0 bottom-0 w-1.5 bg-primary/40 rounded-l-lg" />
+            <div className="relative p-6 sm:p-8 md:p-12 bg-card border border-border shadow-sm rounded-lg sm:rounded-r-lg group">
+              {/* Vertical Lead Line - Hidden on mobile */}
+              <div className="absolute left-0 top-0 bottom-0 w-1.5 bg-primary/40 rounded-l-lg hidden sm:block" />
               
               <div className="relative z-10">
                 <div className="flex items-center gap-3 mb-6">
-                   <div className="w-10 h-10 flex items-center justify-center bg-muted/50 border border-border rounded">
-                     <Quote className="w-5 h-5 text-primary rotate-180" />
+                   <div className="w-8 h-8 sm:w-10 sm:h-10 flex items-center justify-center bg-muted/50 border border-border rounded">
+                     <Quote className="w-4 h-4 sm:w-5 sm:h-5 text-primary rotate-180" />
                    </div>
                    <div className="h-px flex-1 bg-border/40" />
-                   <p className="text-[10px] font-black text-primary uppercase tracking-[0.2em] whitespace-nowrap">
+                   <p className="text-[9px] sm:text-[10px] font-black text-primary uppercase tracking-[0.2em] whitespace-nowrap">
                     {lang === "bn" ? "১৩ নভেম্বর, ২০২২" : "November 13, 2022"}
                   </p>
                 </div>
                 
-                <h3 className="text-xl md:text-2xl font-black text-foreground mb-8 leading-tight max-w-2xl" style={{ fontFamily: "var(--font-orbitron), sans-serif" }}>
+                <h3 className="text-lg sm:text-xl md:text-2xl font-black text-foreground mb-6 sm:mb-8 leading-tight max-w-2xl" style={{ fontFamily: "var(--font-orbitron), sans-serif" }}>
                   {lang === "bn" ? content.bn.title : CHAIRMAN_SPEECH_DATA.title}
                 </h3>
 
-                <div className="space-y-6 text-muted-foreground leading-relaxed font-medium text-sm md:text-base whitespace-pre-line border-l border-border/20 pl-6">
+                <div className="space-y-4 sm:space-y-6 text-muted-foreground leading-relaxed font-medium text-sm md:text-base whitespace-pre-line border-l border-border/20 pl-4 sm:pl-6">
                   {lang === "bn" ? content.bn.speech : CHAIRMAN_SPEECH_DATA.content.join('\n\n')}
                 </div>
               </div>

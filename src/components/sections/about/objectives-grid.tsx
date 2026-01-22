@@ -62,26 +62,26 @@ const colorMap: Record<string, { bg: string; border: string; text: string; icon:
 
 export const ObjectivesGrid = () => {
   return (
-    <section className="py-20 px-4 sm:px-6 lg:px-8">
+    <section className="py-12 sm:py-20 px-4 sm:px-6 lg:px-8">
       <div className="max-w-7xl mx-auto">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          className="text-center mb-16"
+          className="text-center mb-10 sm:mb-16"
         >
-          <span className="text-xs font-black uppercase tracking-[0.3em] text-primary mb-4 block">
+          <span className="text-[10px] sm:text-xs font-black uppercase tracking-[0.3em] text-primary mb-3 sm:mb-4 block">
             Our Objectives
           </span>
-          <h2 className="text-4xl md:text-5xl font-black text-foreground mb-4" style={{ fontFamily: "var(--font-orbitron), sans-serif" }}>
+          <h2 className="text-2xl sm:text-4xl md:text-5xl font-black text-foreground mb-3 sm:mb-4" style={{ fontFamily: "var(--font-orbitron), sans-serif" }}>
             Three Pillars of Excellence
           </h2>
-          <p className="text-lg text-muted-foreground max-w-3xl mx-auto">
+          <p className="text-sm sm:text-lg text-muted-foreground max-w-3xl mx-auto">
             Our comprehensive approach to building skilled, professional, and community-oriented programmers
           </p>
         </motion.div>
 
-        <div className="grid md:grid-cols-3 gap-8">
+        <div className="grid md:grid-cols-3 gap-6 sm:gap-8">
           {objectives.map((objective, index) => {
             const colors = colorMap[objective.color];
             const Icon = objective.icon;
@@ -95,30 +95,30 @@ export const ObjectivesGrid = () => {
                 transition={{ duration: 0.6, delay: index * 0.1 }}
                 className="group"
               >
-                <div className={`relative bg-card border ${colors.border} rounded-lg p-8 h-full hover:border-current transition-all duration-300 flex flex-col overflow-hidden`}>
+                <div className={`relative bg-card border ${colors.border} rounded-lg p-6 sm:p-8 h-full hover:border-current transition-all duration-300 flex flex-col overflow-hidden`}>
                   {/* Icon Box */}
-                  <div className="relative w-16 h-16 mb-8 flex items-center justify-center bg-muted/30 border border-border rounded-md group-hover:border-current transition-colors">
-                    <Icon className={`w-8 h-8 ${colors.icon}`} />
+                  <div className="relative w-12 h-12 sm:w-16 sm:h-16 mb-6 sm:mb-8 flex items-center justify-center bg-muted/30 border border-border rounded-md group-hover:border-current transition-colors">
+                    <Icon className={`w-6 h-6 sm:w-8 sm:h-8 ${colors.icon}`} />
                     <div className={`absolute -top-1 -left-1 w-2 h-2 border-t border-l ${colors.border}`} />
                     <div className={`absolute -bottom-1 -right-1 w-2 h-2 border-b border-r ${colors.border}`} />
                   </div>
 
                   {/* Title */}
-                  <h3 className={`text-2xl font-black mb-4 ${colors.text}`} style={{ fontFamily: "var(--font-orbitron), sans-serif" }}>
+                  <h3 className={`text-xl sm:text-2xl font-black mb-3 sm:mb-4 ${colors.text}`} style={{ fontFamily: "var(--font-orbitron), sans-serif" }}>
                     {objective.title}
                   </h3>
 
                   {/* Description */}
-                  <p className="text-muted-foreground leading-relaxed mb-6 font-medium">
+                  <p className="text-sm sm:text-base text-muted-foreground leading-relaxed mb-4 sm:mb-6 font-medium">
                     {objective.description}
                   </p>
 
                   {/* Points */}
-                  <ul className="space-y-3 mt-auto">
+                  <ul className="space-y-2 sm:space-y-3 mt-auto">
                     {objective.points.map((point, i) => (
                       <li key={i} className="flex items-start gap-3">
                         <div className={`w-1.5 h-px bg-current mt-[10px] opacity-40`} />
-                        <span className="text-sm text-muted-foreground font-medium">{point}</span>
+                        <span className="text-xs sm:text-sm text-muted-foreground font-medium">{point}</span>
                       </li>
                     ))}
                   </ul>

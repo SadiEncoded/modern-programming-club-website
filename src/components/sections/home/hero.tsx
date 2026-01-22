@@ -71,13 +71,13 @@ export const Hero = () => {
       </motion.div>
 
       {/* Top Decorative Design Triplet (Left, Center, Right) */}
-      <div className="relative z-20 w-full flex items-start justify-between px-4 sm:px-10 lg:px-16 pointer-events-none mt-1 sm:mt-2">
+      <div className="relative z-20 w-full flex items-start justify-center md:justify-between px-4 sm:px-10 lg:px-16 pointer-events-none mt-1 sm:mt-2">
         {/* Left Design */}
         <motion.div 
           initial={{ opacity: 0, x: -30 }}
           animate={{ opacity: 1, x: 0 }}
           transition={{ duration: 0.8, ease: "easeOut", delay: 0.4 }}
-          className="relative flex-1 h-[70px] sm:h-[90px] lg:h-[110px] pr-4"
+          className="hidden md:block lg:block relative flex-1 h-[70px] sm:h-[90px] lg:h-[110px] pr-4"
         >
           <Image
             src="/sections/shared/top-left-accent.svg"
@@ -93,7 +93,7 @@ export const Hero = () => {
           initial={{ opacity: 0, y: -20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, ease: "easeOut", delay: 0.2 }}
-          className="relative w-[180px] xs:w-[240px] sm:w-[450px] lg:w-[650px] h-[100px] sm:h-[220px] lg:h-[300px] mx-2 sm:mx-4 shrink-0"
+          className="relative mt-4 w-[280px] xs:w-[240px] sm:w-[450px] lg:w-[650px] h-[100px] sm:h-[220px] lg:h-[300px] mx-2 sm:mx-4 shrink-0"
         >
           <Image
             src={isDark ? "/sections/shared/top-center-accent-dark.svg" : "/sections/shared/top-center-accent.svg"}
@@ -109,7 +109,7 @@ export const Hero = () => {
           initial={{ opacity: 0, x: 30 }}
           animate={{ opacity: 1, x: 0 }}
           transition={{ duration: 0.8, ease: "easeOut", delay: 0.4 }}
-          className="relative flex-1 h-[50px] sm:h-[90px] lg:h-[110px] pl-2 sm:pl-4"
+          className="relative hidden md:block lg:block flex-1 h-[50px] sm:h-[90px] lg:h-[110px] pl-2 sm:pl-4"
         >
           <Image
             src="/sections/shared/top-right-accent.svg"
@@ -122,7 +122,8 @@ export const Hero = () => {
       </div>
 
       {/* Hero Content */}
-      <div className="relative z-10 w-full max-w-7xl px-6 sm:px-10 lg:px-16 -mt-8 lg:-mt-12 flex flex-col lg:flex-row items-center gap-12 lg:gap-16 pb-12 lg:pb-24">
+      <div className="relative z-10 w-full max-w-7xl px-4 sm:px-6 lg:px-8
+      lg:-mt-16 flex flex-col lg:flex-row items-center gap-12 lg:gap-16 pb-12 lg:pb-24">
         
         {/* Left Side: Typography & CTAs & Benefits */}
         <div className="w-full lg:w-3/5 text-left space-y-10 lg:space-y-12 relative z-20">
@@ -180,7 +181,7 @@ export const Hero = () => {
           </div>
 
           {/* Benefits in a single row on desktop */}
-          <div className="grid gap-8 lg:gap-70 grid-cols-1 sm:grid-cols-2 lg:grid-cols-4">
+          <div className="grid gap-4 sm:gap-6 lg:gap-[16rem] grid-cols-1 sm:grid-cols-2 lg:grid-cols-4">
             {JOIN_DATA.benefits.map((benefit, index) => {
               const title = benefit.title;
               const Icon = title.includes("Competitive") ? Trophy : 
@@ -193,16 +194,16 @@ export const Hero = () => {
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true }}
                   transition={{ delay: 0.7 + index * 0.1 }}
-                  className="group flex items-start justify-between space-x-3"
+                  className="group flex items-start justify-start space-x-3"
                 >
                   <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-primary/10 transition-colors group-hover:bg-primary/20">
                     <Icon className="h-5 w-5 text-primary" />
                   </div>
-                  <div className="space-y-2 min-w-50">
+                  <div className="space-y-1.5 min-w-50">
                     <h3 className="text-xs font-bold uppercase tracking-wide leading-tight" style={{ fontFamily: "var(--font-orbitron), sans-serif" }}>
                       {benefit.title}
                     </h3>
-                    <p className="text-xs text-muted-foreground leading-relaxed font-medium">{benefit.description}</p>
+                    <p className="text-[10px] sm:text-xs text-muted-foreground leading-relaxed font-medium">{benefit.description}</p>
                   </div>
                 </motion.div>
               );
@@ -215,7 +216,7 @@ export const Hero = () => {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.8, delay: 1.1 }}
-            className="flex flex-wrap gap-5"
+            className="flex flex-wrap gap-4 sm:gap-5"
           >
             <GlitchWrapper>
               <motion.div
@@ -224,7 +225,7 @@ export const Hero = () => {
               >
                 <Link
                   href={HERO_DATA.ctaPrimary.href}
-                  className="inline-block px-10 py-4.5 bg-foreground text-background text-[10px] font-black tracking-[0.2em] uppercase rounded-full hover:bg-primary hover:text-white hover:shadow-[0_8px_30px_rgba(0,103,79,0.3)] focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 transition-all relative group overflow-hidden shadow-xl dark:shadow-none"
+                  className="inline-block px-6 py-3 sm:px-10 sm:py-4.5 bg-foreground text-background text-[10px] font-black tracking-[0.2em] uppercase rounded-full hover:bg-primary hover:text-white hover:shadow-[0_8px_30px_rgba(0,103,79,0.3)] focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 transition-all relative group overflow-hidden shadow-xl dark:shadow-none"
                   style={{ fontFamily: "var(--font-orbitron), sans-serif" }}
                 >
                   <span className="relative z-10">{HERO_DATA.ctaPrimary.label}</span>
@@ -240,7 +241,7 @@ export const Hero = () => {
                 whileHover={{ scale: 1.02 }}
                 whileTap={{ scale: 0.98 }}
                 onClick={() => document.getElementById('pillars')?.scrollIntoView({ behavior: 'smooth' })}
-                className="px-10 py-4.5 border-2 border-foreground/20 text-foreground text-[10px] font-black tracking-[0.2em] uppercase rounded-full hover:border-primary hover:text-primary focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 transition-all active:bg-primary/5"
+                className="px-6 py-3 sm:px-10 sm:py-4.5 border-2 border-foreground/20 text-foreground text-[10px] font-black tracking-[0.2em] uppercase rounded-full hover:border-primary hover:text-primary focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 transition-all active:bg-primary/5"
                 style={{ fontFamily: "var(--font-orbitron), sans-serif" }}
               >
                 {HERO_DATA.ctaSecondary.label}
@@ -254,9 +255,9 @@ export const Hero = () => {
           initial={{ opacity: 0, scale: 0.95, x: 40 }}
           animate={{ opacity: 1, scale: 1, x: 0 }}
           transition={{ duration: 1.2, ease: [0.16, 1, 0.3, 1] }}
-          className="w-full lg:w-[55%] lg:absolute lg:right-0 lg:top-4 relative group pointer-events-none"
+          className="w-full lg:w-[55%] lg:absolute lg:right-0 lg:top-4 relative mt-12 md:mt-12 lg:mt-0 group pointer-events-none"
         >
-          <div className="w-full h-full animate-float scale-110 lg:scale-125">
+          <div className="w-full h-full animate-float scale-160 md:scale-125 lg:scale-125">
             <PixelImage
               src="/sections/home/macBookHero.svg"
               grid="8x3"

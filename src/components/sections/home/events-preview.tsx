@@ -30,7 +30,7 @@ export const EventsPreview = ({ events }: EventsPreviewProps) => {
   const displayEvents = activeTab === "upcoming" ? upcomingEvents : pastEvents;
 
   return (
-    <section className="py-16 relative">
+    <section className="py-12 sm:py-16 lg:py-24 relative">
       {/* Background gradient accent */}
       <div className="absolute inset-0 bg-gradient-to-b from-primary/5 via-transparent to-transparent pointer-events-none" />
       

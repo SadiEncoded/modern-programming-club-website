@@ -22,7 +22,7 @@ export const SocialProof = () => {
   return (
     <div className="w-full bg-background border-y border-border py-6">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex flex-col md:flex-row items-center justify-around gap-8">
+        <div className="flex flex-col md:flex-row items-center justify-around gap-6 sm:gap-8">
           {stats.map((stat, index) => (
             <motion.div
               key={stat.text}

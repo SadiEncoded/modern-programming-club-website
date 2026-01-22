@@ -5,7 +5,7 @@ import { Calendar, Code2, Terminal } from "lucide-react";
 
 export const EventsHero = () => {
   return (
-    <section className="relative w-full pt-32 pb-12 overflow-hidden border-b border-border/50">
+    <section className="relative w-full pt-24 pb-12 sm:pt-32 overflow-hidden border-b border-border/50">
       {/* Background Tech Elements */}
       <div className="absolute inset-0 -z-10 bg-background">
         <div 
@@ -24,9 +24,9 @@ export const EventsHero = () => {
             <motion.div 
               initial={{ opacity: 0, x: -20 }}
               animate={{ opacity: 1, x: 0 }}
-              className="flex items-center gap-3 text-primary font-mono text-sm tracking-widest uppercase"
+              className="flex items-center gap-3 text-primary font-mono text-xs sm:text-sm tracking-widest uppercase"
             >
-              <Terminal className="w-4 h-4" />
+              <Terminal className="w-3 h-3 sm:w-4 sm:h-4" />
               <span>System_Events_Log</span>
             </motion.div>
             
@@ -34,7 +34,7 @@ export const EventsHero = () => {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.1 }}
-              className="text-5xl md:text-7xl font-black text-foreground tracking-tighter"
+              className="text-4xl sm:text-5xl md:text-7xl font-black text-foreground tracking-tighter"
               style={{ fontFamily: "var(--font-orbitron), sans-serif" }}
             >
               ENGAGE <br />
@@ -46,7 +46,7 @@ export const EventsHero = () => {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.2 }}
-              className="text-lg text-muted-foreground font-medium leading-relaxed border-l-2 border-primary/30 pl-6"
+              className="text-sm sm:text-lg text-muted-foreground font-medium leading-relaxed border-l-2 border-primary/30 pl-4 sm:pl-6"
             >
               Join the timeline of innovation. Participate in hackathons, workshops, and 
               coding sprints designed to upgrade your stack.
@@ -60,14 +60,14 @@ export const EventsHero = () => {
             transition={{ delay: 0.3 }}
             className="flex gap-4 md:gap-8"
           >
-            <div className="h-32 w-32 bg-card border border-border flex flex-col items-center justify-center p-4 text-center group hover:border-primary transition-colors">
-              <Calendar className="w-8 h-8 text-muted-foreground group-hover:text-primary transition-colors mb-2" />
-              <span className="text-2xl font-bold font-mono">20+</span>
+            <div className="h-28 w-28 sm:h-32 sm:w-32 bg-card border border-border flex flex-col items-center justify-center p-4 text-center group hover:border-primary transition-colors">
+              <Calendar className="w-6 h-6 sm:w-8 sm:h-8 text-muted-foreground group-hover:text-primary transition-colors mb-2" />
+              <span className="text-xl sm:text-2xl font-bold font-mono">20+</span>
               <span className="text-[10px] uppercase tracking-wider text-muted-foreground">Annual Events</span>
             </div>
-            <div className="h-32 w-32 bg-card border border-border flex flex-col items-center justify-center p-4 text-center group hover:border-primary transition-colors">
-              <Code2 className="w-8 h-8 text-muted-foreground group-hover:text-primary transition-colors mb-2" />
-              <span className="text-2xl font-bold font-mono">100%</span>
+            <div className="h-28 w-28 sm:h-32 sm:w-32 bg-card border border-border flex flex-col items-center justify-center p-4 text-center group hover:border-primary transition-colors">
+              <Code2 className="w-6 h-6 sm:w-8 sm:h-8 text-muted-foreground group-hover:text-primary transition-colors mb-2" />
+              <span className="text-xl sm:text-2xl font-bold font-mono">100%</span>
               <span className="text-[10px] uppercase tracking-wider text-muted-foreground">Tech Focused</span>
             </div>
           </motion.div>

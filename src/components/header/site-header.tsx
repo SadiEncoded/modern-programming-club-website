@@ -63,7 +63,7 @@ export const SiteHeader = () => {
           </div>
 
           {/* Center Section: Mobile Logo / Desktop Nav */}
-          <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 lg:static lg:transform-none lg:flex-1 lg:flex lg:justify-center z-10">
+          <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 z-10">
             {/* Logo - Centered on mobile */}
             <Link href="/" className="lg:hidden flex items-center justify-center group">
               <div className="relative">

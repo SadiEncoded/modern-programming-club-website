@@ -44,12 +44,12 @@ const StatItem = ({ value, label, suffix = "", delay = 0 }: StatItemProps) => {
     >
       <div
         ref={ref}
-        className="text-5xl md:text-6xl font-black text-foreground mb-2"
+        className="text-4xl sm:text-5xl md:text-6xl font-black text-foreground mb-2"
         style={{ fontFamily: "var(--font-orbitron), sans-serif" }}
       >
         0{suffix}
       </div>
-      <div className="text-sm md:text-base text-muted-foreground font-medium uppercase tracking-wider">
+      <div className="text-xs sm:text-sm md:text-base text-muted-foreground font-medium uppercase tracking-wider">
         {label}
       </div>
     </motion.div>
@@ -58,18 +58,18 @@ const StatItem = ({ value, label, suffix = "", delay = 0 }: StatItemProps) => {
 
 export const StatsShowcase = () => {
   return (
-    <section className="py-20 px-4 sm:px-6 lg:px-8 bg-muted/30">
+    <section className="py-12 sm:py-20 px-4 sm:px-6 lg:px-8 bg-muted/30">
       <div className="max-w-7xl mx-auto">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          className="text-center mb-16"
+          className="text-center mb-10 sm:mb-16"
         >
-          <span className="text-xs font-black uppercase tracking-[0.3em] text-primary mb-4 block">
+          <span className="text-[10px] sm:text-xs font-black uppercase tracking-[0.3em] text-primary mb-3 sm:mb-4 block">
             {IMPACT_DATA.eyebrow}
           </span>
-          <h2 className="text-4xl md:text-5xl font-black text-foreground" style={{ fontFamily: "var(--font-orbitron), sans-serif" }}>
+          <h2 className="text-3xl sm:text-4xl md:text-5xl font-black text-foreground" style={{ fontFamily: "var(--font-orbitron), sans-serif" }}>
             {IMPACT_DATA.title}
           </h2>
         </motion.div>

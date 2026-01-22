@@ -5,7 +5,7 @@ import { motion } from "framer-motion";
 
 export const AboutHero = () => {
   return (
-    <section className="relative min-h-[70vh] flex items-center justify-center overflow-hidden bg-background pt-32 pb-20">
+    <section className="relative min-h-[70vh] flex items-center justify-center overflow-hidden bg-background pt-24 pb-12 sm:pt-32 sm:pb-20">
       {/* SVG Pattern Background */}
       <div className="absolute inset-0 opacity-[0.03]">
         <svg className="w-full h-full" xmlns="http://www.w3.org/2000/svg">
@@ -31,9 +31,9 @@ export const AboutHero = () => {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6 }}
-          className="mb-6"
+          className="mb-4 sm:mb-6"
         >
-          <span className="text-xs font-black uppercase tracking-[0.3em] text-primary">
+          <span className="text-[10px] sm:text-xs font-black uppercase tracking-[0.3em] text-primary">
             {ABOUT_HERO_DATA.eyebrow}
           </span>
         </motion.div>
@@ -42,7 +42,7 @@ export const AboutHero = () => {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, delay: 0.1 }}
-          className="text-5xl md:text-7xl lg:text-8xl font-black text-foreground mb-8 tracking-tight"
+          className="text-3xl sm:text-5xl md:text-7xl lg:text-8xl font-black text-foreground mb-6 sm:mb-8 tracking-tight"
           style={{ fontFamily: "var(--font-orbitron), sans-serif" }}
         >
           {ABOUT_HERO_DATA.title}
@@ -52,12 +52,12 @@ export const AboutHero = () => {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, delay: 0.2 }}
-          className="mb-8"
+          className="mb-6 sm:mb-8"
         >
-          <p className="text-2xl md:text-3xl font-bold text-primary mb-4" style={{ fontFamily: "var(--font-orbitron), sans-serif" }}>
+          <p className="text-lg sm:text-2xl md:text-3xl font-bold text-primary mb-3 sm:mb-4" style={{ fontFamily: "var(--font-orbitron), sans-serif" }}>
             {ABOUT_HERO_DATA.quote}
           </p>
-          <p className="text-lg md:text-xl text-muted-foreground max-w-4xl mx-auto leading-relaxed font-medium">
+          <p className="text-sm sm:text-lg md:text-xl text-muted-foreground max-w-4xl mx-auto leading-relaxed font-medium px-4">
             {ABOUT_HERO_DATA.description}
           </p>
         </motion.div>
