@@ -91,7 +91,7 @@ export const TeamGrid = ({ members }: TeamGridProps) => {
                       </motion.div>
 
                       {/* Members Grid */}
-                      <div className="flex flex-wrap justify-center gap-6">
+                      <div className="flex flex-wrap justify-center gap-3 sm:gap-6">
                         {deptMembers.map((member, index) => {
                           const colors = departmentColors[member.department as Department];
                           
@@ -102,10 +102,10 @@ export const TeamGrid = ({ members }: TeamGridProps) => {
                               whileInView={{ opacity: 1, y: 0 }}
                               viewport={{ once: true }}
                               transition={{ delay: index * 0.05, duration: 0.5 }}
-                              className="group relative w-full sm:w-[calc(50%-0.75rem)] md:w-[calc(33.33%-1rem)] lg:w-[calc(25%-1.125rem)] max-w-[280px]"
+                              className="group relative w-[calc(50%-0.375rem)] sm:w-[calc(50%-0.75rem)] md:w-[calc(33.33%-1rem)] lg:w-[calc(25%-1.125rem)]"
                             >
                               <div className={cn(
-                                  "relative h-full bg-card rounded-2xl border transition-all duration-500 flex flex-col overflow-hidden",
+                                  "relative h-full bg-card rounded-xl sm:rounded-2xl border transition-all duration-500 flex flex-col overflow-hidden",
                                   colors.border,
                                   "hover:shadow-2xl hover:shadow-primary/10 hover:-translate-y-1"
                                 )}>
@@ -133,18 +133,18 @@ export const TeamGrid = ({ members }: TeamGridProps) => {
                                     <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent z-20 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
                                   </div>
 
-                                  <div className="p-4 flex flex-col flex-grow text-center relative z-20">
+                                  <div className="p-2 sm:p-4 flex flex-col flex-grow text-center relative z-20">
                                     <h4
-                                      className="text-base font-black text-foreground mb-1 tracking-tight"
+                                      className="text-xs sm:text-base font-black text-foreground mb-1 tracking-tight"
                                       style={{ fontFamily: "var(--font-orbitron), sans-serif" }}
                                     >
                                       {member.name}
                                     </h4>
-                                    <p className={cn("text-xs font-bold mb-3 uppercase tracking-wider", colors.text)}>
+                                    <p className={cn("text-[10px] sm:text-xs font-bold mb-2 sm:mb-3 uppercase tracking-wider", colors.text)}>
                                       {member.role}
                                     </p>
 
-                                    <p className="text-xs text-muted-foreground leading-relaxed mb-4 line-clamp-2">
+                                    <p className="text-[9px] sm:text-xs text-muted-foreground leading-relaxed mb-3 sm:mb-4 line-clamp-2">
                                       {member.bio}
                                     </p>
 

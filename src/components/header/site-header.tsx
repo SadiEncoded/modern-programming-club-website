@@ -41,80 +41,81 @@ export const SiteHeader = () => {
     >
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-16 sm:h-20 relative transition-all duration-300">
-          {/* Left Design Pattern - Desktop */}
-          <div className="hidden lg:flex items-center gap-4">
-            <Link href="/" className="relative w-20 h-10 shrink-0 opacity-80 hover:opacity-100 transition-opacity">
-              <Image
-                src="/sections/shared/header-left-accent.svg"
-                alt="DICPC Home"
-                fill
-                className="object-contain"
-              />
-            </Link>
-          </div>
+          
+          {/* Left Section: Mobile Theme / Desktop Accent */}
+          <div className="flex items-center z-20">
+             {/* Mobile Theme Switcher - Left Side */}
+             <div className="lg:hidden">
+                <ThemeSwitcher />
+             </div>
 
-          {/* Logo - Visible on mobile/tablet */}
-          <Link href="/" className="lg:hidden flex items-center space-x-2 group">
-            <div className="relative">
-              <Image
-                src={logoSrc}
-                alt="DICPC logo"
-                width={300}
-                height={300}
-                priority
-                className={cn(
-                  "transition-all duration-500 group-hover:scale-110",
-                  isScrolled ? "w-8 h-8" : "w-10 h-10"
-                )}
-              />
-            </div>
-          </Link>
-
-          {/* Desktop Navigation - Centered sequence */}
-          <nav className="hidden lg:flex items-center justify-center flex-1">
-            <div className="flex items-center space-x-8">
-              {NAVIGATION.main.map((item) => (
-                <Link
-                  key={item.href}
-                  href={item.href}
-                  className="relative group px-1 py-2 text-[11px] font-bold tracking-[0.2em] uppercase text-foreground/80 hover:text-primary transition-colors duration-300"
-                  style={{ fontFamily: "var(--font-orbitron), sans-serif" }}
-                >
-                  {item.label}
-                  <motion.span 
-                    className="absolute bottom-0 left-0 w-0 h-[2px] bg-primary transition-all duration-300 group-hover:w-full"
-                    layoutId="nav-hover"
-                  />
-                  <span className="absolute -top-1 -right-1 w-1 h-1 bg-primary scale-0 rounded-full transition-transform duration-300 group-hover:scale-100" />
-                </Link>
-              ))}
-              <Link
-                href="/join"
-                className="relative group px-6 py-2 text-[10px] font-black tracking-[0.2em] uppercase bg-foreground text-background hover:bg-primary-vibrant hover:text-white transition-all duration-300 rounded-full overflow-hidden"
-                style={{ fontFamily: "var(--font-orbitron), sans-serif" }}
-              >
-                <span className="relative z-10">Join Now</span>
-                <motion.div 
-                  className="absolute inset-0 bg-white/10 opacity-0 group-hover:opacity-100 transition-opacity"
+             {/* Desktop Left Design Pattern */}
+             <div className="hidden lg:flex items-center gap-4">
+              <Link href="/" className="relative w-20 h-10 shrink-0 opacity-80 hover:opacity-100 transition-opacity">
+                <Image
+                  src="/sections/shared/header-left-accent.svg"
+                  alt="DICPC Home"
+                  fill
+                  className="object-contain"
                 />
               </Link>
             </div>
-          </nav>
+          </div>
 
-          {/* Right Section: Pattern + Notifications */}
-          <div className="flex items-center space-x-6">
-            {/* Theme switcher */}
-            <div className="flex items-center">
-              <ThemeSwitcher />
-              
-              <button
-                className="hidden md:block p-2.5 rounded-full hover:bg-muted transition-all duration-300 text-muted-foreground hover:text-primary active:scale-95"
-                aria-label="Notifications"
-              >
-                <Bell className="w-5 h-5 transition-transform group-hover:rotate-12" />
-              </button>
-            </div>
+          {/* Center Section: Mobile Logo / Desktop Nav */}
+          <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 lg:static lg:transform-none lg:flex-1 lg:flex lg:justify-center z-10">
+            {/* Logo - Centered on mobile */}
+            <Link href="/" className="lg:hidden flex items-center justify-center group">
+              <div className="relative">
+                <Image
+                  src={logoSrc}
+                  alt="DICPC logo"
+                  width={300}
+                  height={300}
+                  priority
+                  className={cn(
+                    "transition-all duration-500 group-hover:scale-110",
+                    isScrolled ? "w-8 h-8" : "w-10 h-10"
+                  )}
+                />
+              </div>
+            </Link>
 
+            {/* Desktop Navigation */}
+            <nav className="hidden lg:flex items-center justify-center">
+               <div className="flex items-center space-x-8">
+                {NAVIGATION.main.map((item) => (
+                  <Link
+                    key={item.href}
+                    href={item.href}
+                    className="relative group px-1 py-2 text-[11px] font-bold tracking-[0.2em] uppercase text-foreground/80 hover:text-primary transition-colors duration-300"
+                    style={{ fontFamily: "var(--font-orbitron), sans-serif" }}
+                  >
+                    {item.label}
+                    <motion.span 
+                      className="absolute bottom-0 left-0 w-0 h-[2px] bg-primary transition-all duration-300 group-hover:w-full"
+                      layoutId="nav-hover"
+                    />
+                    <span className="absolute -top-1 -right-1 w-1 h-1 bg-primary scale-0 rounded-full transition-transform duration-300 group-hover:scale-100" />
+                  </Link>
+                ))}
+                <Link
+                  href="/join"
+                  className="relative group px-6 py-2 text-[10px] font-black tracking-[0.2em] uppercase bg-foreground text-background hover:bg-primary-vibrant hover:text-white transition-all duration-300 rounded-full overflow-hidden"
+                  style={{ fontFamily: "var(--font-orbitron), sans-serif" }}
+                >
+                  <span className="relative z-10">Join Now</span>
+                  <motion.div 
+                    className="absolute inset-0 bg-white/10 opacity-0 group-hover:opacity-100 transition-opacity"
+                  />
+                </Link>
+              </div>
+            </nav>
+          </div>
+
+          {/* Right Section: Mobile Menu / Desktop Tools */}
+          <div className="flex items-center z-20">
+             {/* Mobile Menu Toggle - Right Side */}
             <button
               onClick={() => setIsOpen(!isOpen)}
               className="lg:hidden p-2 rounded-xl hover:bg-muted transition-all duration-300 overflow-hidden"
@@ -132,14 +133,26 @@ export const SiteHeader = () => {
               </motion.div>
             </button>
 
-            {/* Right Design Pattern - Far Right */}
-            <div className="hidden lg:block relative w-20 h-10 ml-2 shrink-0 opacity-80 hover:opacity-100 transition-opacity">
-              <Image
-                src="/sections/shared/header-right-accent.svg"
-                alt=""
-                fill
-                className="object-contain"
-              />
+            {/* Desktop Right Tools */}
+            <div className="hidden lg:flex items-center space-x-6">
+              <div className="flex items-center">
+                <ThemeSwitcher />
+                <button
+                  className="hidden md:block p-2.5 rounded-full hover:bg-muted transition-all duration-300 text-muted-foreground hover:text-primary active:scale-95"
+                  aria-label="Notifications"
+                >
+                  <Bell className="w-5 h-5 transition-transform group-hover:rotate-12" />
+                </button>
+              </div>
+               {/* Right Design Pattern */}
+              <div className="relative w-20 h-10 ml-2 shrink-0 opacity-80 hover:opacity-100 transition-opacity">
+                <Image
+                  src="/sections/shared/header-right-accent.svg"
+                  alt=""
+                  fill
+                  className="object-contain"
+                />
+              </div>
             </div>
           </div>
         </div>

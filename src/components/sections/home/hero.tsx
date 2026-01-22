@@ -151,7 +151,7 @@ export const Hero = () => {
                   whileInView={{ opacity: 1, x: 0 }}
                   viewport={{ once: true }}
                   transition={{ duration: 0.8, delay: 0.8 }}
-                  className="text-xl md:text-2xl font-bold tracking-tight text-foreground/70"
+                  className="text-md md:text-2xl font-bold tracking-tight text-foreground/70"
                   style={{ fontFamily: "var(--font-bruno-ace), var(--font-orbitron), sans-serif" }}
                 >
                   <TechText text={HERO_DATA.title1} glitchInterval={8000} aria-label={HERO_DATA.title1} />
@@ -161,7 +161,7 @@ export const Hero = () => {
                   whileInView={{ opacity: 1, x: 0 }}
                   viewport={{ once: true }}
                   transition={{ duration: 0.8, delay: 0.9 }}
-                  className="text-lg md:text-xl font-bold tracking-tight text-foreground/50"
+                  className="text-md md:text-xl font-bold tracking-tight text-foreground/50"
                   style={{ fontFamily: "var(--font-bruno-ace), var(--font-orbitron), sans-serif" }}
                 >
                   <TechText text={HERO_DATA.title2} glitchInterval={10000} scrambleSpeed={40} aria-label={HERO_DATA.title2} />
@@ -173,7 +173,7 @@ export const Hero = () => {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, delay: 1.0 }}
-              className="text-base sm:text-lg md:text-xl text-muted-foreground leading-relaxed max-w-2xl font-medium"
+              className="text-base md:text-xl text-muted-foreground leading-relaxed max-w-2xl font-medium"
             >
               {JOIN_DATA.description}
             </motion.p>
