@@ -1,5 +1,5 @@
 import { TeamMemberWithSkills } from "@/types/team";
-import { members as localMembers } from "./local-data";
+import { members as localMembers } from "./club-data";
 
 /**
  * Fetch all active team members with their skills (Mocked)

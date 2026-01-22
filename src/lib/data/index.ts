@@ -12,7 +12,7 @@ import {
     type Event,
     type Member,
     type Project
-} from "./local-data";
+} from "./club-data";
 
 type QueryOptions = {
   limit?: number;
@@ -164,7 +164,7 @@ export const getBlogPostBySlug = cache(
 );
 
 export * from "./about";
+export * from "./club-data";
 export * from "./home";
 export * from "./join";
-export * from "./local-data";
 export * from "./team";
