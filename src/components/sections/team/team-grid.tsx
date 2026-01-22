@@ -117,7 +117,7 @@ export const TeamGrid = ({ members }: TeamGridProps) => {
                                   <div className="relative aspect-square overflow-hidden bg-muted/20">
                                      <ImageLoader src={member.image_url || "/team/placeholder.jpg"} alt={member.name} />
                                      
-                                     <div className="absolute inset-0 z-10 opacity-0 group-hover:opacity-100 transition-opacity duration-500">
+                                     <div className="absolute inset-0 z-10 opacity-0 group-hover:opacity-30 transition-opacity duration-500">
                                         <CanvasRevealEffect
                                           animationSpeed={3}
                                           containerClassName="bg-transparent"
