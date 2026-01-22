@@ -82,7 +82,7 @@ export const metadata: Metadata = {
     siteName: "DICPC",
     images: [
       {
-        url: "/og.png",
+        url: "/brand/og-preview.png",
         width: 1200,
         height: 630,
         alt: "DICPC Open Graph Image",
@@ -96,7 +96,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: "DICPC — Daffodil International College Programming Club",
     description: "Official portal for events, contests, projects, and community of DICPC.",
-    images: ["/og.png"],
+    images: ["/brand/og-preview.png"],
   },
 };
 
