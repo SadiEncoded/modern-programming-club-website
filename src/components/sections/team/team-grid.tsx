@@ -1,7 +1,6 @@
 "use client";
 
 import { CanvasRevealEffect } from "@/components/ui/canvas-reveal-effect";
-import { GlitchWrapper } from "@/components/ui/glitch-wrapper";
 import { Skeleton } from "@/components/ui/skeleton";
 import { cn } from "@/lib/utils";
 import { Department, TeamMemberWithSkills } from "@/types/team";
@@ -105,8 +104,7 @@ export const TeamGrid = ({ members }: TeamGridProps) => {
                               transition={{ delay: index * 0.05, duration: 0.5 }}
                               className="group relative w-full sm:w-[calc(50%-0.75rem)] md:w-[calc(33.33%-1rem)] lg:w-[calc(25%-1.125rem)] max-w-[280px]"
                             >
-                              <GlitchWrapper className="w-full">
-                                <div className={cn(
+                              <div className={cn(
                                   "relative h-full bg-card rounded-2xl border transition-all duration-500 flex flex-col overflow-hidden",
                                   colors.border,
                                   "hover:shadow-2xl hover:shadow-primary/10 hover:-translate-y-1"
@@ -182,7 +180,6 @@ export const TeamGrid = ({ members }: TeamGridProps) => {
                                     </div>
                                   </div>
                                 </div>
-                              </GlitchWrapper>
                             </motion.div>
                           );
                         })}
