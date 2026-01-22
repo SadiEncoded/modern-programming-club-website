@@ -8,12 +8,6 @@ import { motion } from "framer-motion";
 import { Code2, Trophy, Users2, Zap } from "lucide-react";
 import { RegisterForm } from "./register-form";
 
-const ICON_MAP = {
-  Trophy,
-  Code2,
-  Users2,
-  Zap,
-};
 
 export function JoinContent() {
   return (

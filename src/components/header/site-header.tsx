@@ -40,7 +40,7 @@ export const SiteHeader = () => {
       )}
     >
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-        <div className="flex items-center justify-between h-20 relative transition-all duration-300">
+        <div className="flex items-center justify-between h-16 sm:h-20 relative transition-all duration-300">
           {/* Left Design Pattern - Desktop */}
           <div className="hidden lg:flex items-center gap-4">
             <Link href="/" className="relative w-20 h-10 shrink-0 opacity-80 hover:opacity-100 transition-opacity">
@@ -174,7 +174,7 @@ export const SiteHeader = () => {
               </button>
               <Link
                 href="/join"
-                className="block w-full px-4 py-3 bg-foreground text-background rounded-xl text-[10px] font-black uppercase tracking-[0.2em] text-center hover:bg-primary-vibrant hover:text-white transition-all shadow-lg"
+                className="block w-full px-4 py-3.5 bg-foreground text-background rounded-xl text-[10px] font-black uppercase tracking-[0.2em] text-center hover:bg-primary-vibrant hover:text-white transition-all shadow-lg active:scale-[0.98]"
                 style={{ fontFamily: "var(--font-orbitron), sans-serif" }}
                 onClick={() => setIsOpen(false)}
               >

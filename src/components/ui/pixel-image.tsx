@@ -1,8 +1,10 @@
 "use client"
 
+import Image from "next/image"
 import { useEffect, useMemo, useState } from "react"
 
 import { cn } from "@/lib/utils"
+import { Skeleton } from "./skeleton"
 
 type Grid = {
   rows: number
@@ -42,8 +44,9 @@ export const PixelImage = ({
   imgClassName,
   loading = "eager", // Default to eager loading
 }: PixelImageProps & { className?: string; imgClassName?: string }) => {
-  const [isVisible, _setIsVisible] = useState(true)
+  const [isVisible, setIsVisible] = useState(false)
   const [showColor, setShowColor] = useState(false)
+  const [isLoaded, setIsLoaded] = useState(false)
 
   const MIN_GRID = 1
   const MAX_GRID = 16
@@ -66,11 +69,22 @@ export const PixelImage = ({
   }, [customGrid, grid])
 
   useEffect(() => {
+    if (!isLoaded) return;
+    
+    // Once loaded, wait a tiny bit then start the pixel reveal
+    const revealTimeout = setTimeout(() => {
+      setIsVisible(true)
+    }, 100);
+
     const colorTimeout = setTimeout(() => {
       setShowColor(true)
-    }, colorRevealDelay)
-    return () => clearTimeout(colorTimeout)
-  }, [colorRevealDelay])
+    }, colorRevealDelay + 100)
+    
+    return () => {
+      clearTimeout(revealTimeout)
+      clearTimeout(colorTimeout)
+    }
+  }, [colorRevealDelay, isLoaded])
 
   const pieces = useMemo(() => {
     const total = rows * cols
@@ -97,7 +111,24 @@ export const PixelImage = ({
 
   return (
     <div className={cn("relative w-full h-full select-none", className)}>
-      {pieces.map((piece, index) => (
+      {!isLoaded && <Skeleton className="absolute inset-0 z-50" />}
+      
+      {/* Hidden real image used to trigger loading state */}
+      <Image
+        src={src} 
+        alt="" 
+        onLoad={() => setIsLoaded(true)} 
+        className="hidden" 
+        loading={loading === "lazy" ? "lazy" : "eager"}
+        width={100}
+        height={100}
+      />
+
+      <div className={cn(
+        "relative w-full h-full transition-opacity duration-500",
+        isLoaded ? "opacity-100" : "opacity-0"
+      )}>
+        {pieces.map((piece, index) => (
         <div
           key={index}
           className={cn(
@@ -110,6 +141,7 @@ export const PixelImage = ({
             transitionDuration: `${pixelFadeInDuration}ms`,
           }}
         >
+          {/* eslint-disable-next-line @next/next/no-img-element */}
           <img
             src={src}
             alt={`Pixel image piece ${index + 1}`}
@@ -128,6 +160,7 @@ export const PixelImage = ({
           />
         </div>
       ))}
+      </div>
     </div>
   )
 }

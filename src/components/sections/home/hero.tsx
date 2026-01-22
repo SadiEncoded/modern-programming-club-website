@@ -3,6 +3,7 @@
 import { useTheme } from "next-themes";
 import React from "react";
 
+import { GlitchWrapper } from "@/components/ui/glitch-wrapper";
 import { PixelImage } from "@/components/ui/pixel-image";
 import { RetroGrid } from "@/components/ui/retro-grid";
 import { Spotlight } from "@/components/ui/spotlight";
@@ -24,7 +25,7 @@ export const Hero = () => {
   const isDark = mounted && (resolvedTheme === 'dark' || theme === 'dark');
 
   return (
-    <section className="relative min-h-screen flex flex-col items-center justify-start pt-16 lg:pt-20 overflow-hidden">
+    <section className="relative min-h-[90vh] lg:min-h-screen flex flex-col items-center justify-start pt-12 sm:pt-16 lg:pt-20 overflow-hidden">
       <motion.div
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
@@ -70,7 +71,7 @@ export const Hero = () => {
       </motion.div>
 
       {/* Top Decorative Design Triplet (Left, Center, Right) */}
-      <div className="relative z-20 w-full flex items-start justify-between px-6 sm:px-10 lg:px-16 pointer-events-none mt-2">
+      <div className="relative z-20 w-full flex items-start justify-between px-4 sm:px-10 lg:px-16 pointer-events-none mt-1 sm:mt-2">
         {/* Left Design */}
         <motion.div 
           initial={{ opacity: 0, x: -30 }}
@@ -92,7 +93,7 @@ export const Hero = () => {
           initial={{ opacity: 0, y: -20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, ease: "easeOut", delay: 0.2 }}
-          className="relative w-[300px] sm:w-[450px] lg:w-[650px] h-[150px] sm:h-[220px] lg:h-[300px] mx-4 shrink-0"
+          className="relative w-[180px] xs:w-[240px] sm:w-[450px] lg:w-[650px] h-[100px] sm:h-[220px] lg:h-[300px] mx-2 sm:mx-4 shrink-0"
         >
           <Image
             src={isDark ? "/sections/shared/top-center-accent-dark.svg" : "/sections/shared/top-center-accent.svg"}
@@ -108,7 +109,7 @@ export const Hero = () => {
           initial={{ opacity: 0, x: 30 }}
           animate={{ opacity: 1, x: 0 }}
           transition={{ duration: 0.8, ease: "easeOut", delay: 0.4 }}
-          className="relative flex-1 h-[70px] sm:h-[90px] lg:h-[110px] pl-4"
+          className="relative flex-1 h-[50px] sm:h-[90px] lg:h-[110px] pl-2 sm:pl-4"
         >
           <Image
             src="/sections/shared/top-right-accent.svg"
@@ -133,7 +134,7 @@ export const Hero = () => {
                   initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.8, delay: 0.6 }}
-                  className="text-6xl md:text-7xl lg:text-8xl font-black tracking-tighter leading-[0.9]"
+                  className="text-4xl xs:text-5xl sm:text-7xl lg:text-8xl font-black tracking-tighter leading-[0.9]"
                   style={{ fontFamily: "var(--font-bruno-ace), var(--font-orbitron), sans-serif" }}
                 >
                   Level up <br className="hidden sm:block" />
@@ -172,7 +173,7 @@ export const Hero = () => {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, delay: 1.0 }}
-              className="text-lg md:text-xl text-muted-foreground leading-relaxed max-w-2xl font-medium"
+              className="text-base sm:text-lg md:text-xl text-muted-foreground leading-relaxed max-w-2xl font-medium"
             >
               {JOIN_DATA.description}
             </motion.p>
@@ -216,30 +217,35 @@ export const Hero = () => {
             transition={{ duration: 0.8, delay: 1.1 }}
             className="flex flex-wrap gap-5"
           >
-            <motion.div
-              whileHover={{ scale: 1.02 }}
-              whileTap={{ scale: 0.98 }}
-            >
-              <Link
-                href={HERO_DATA.ctaPrimary.href}
-                className="inline-block px-10 py-4.5 bg-foreground text-background text-[10px] font-black tracking-[0.2em] uppercase rounded-full hover:bg-primary hover:text-white hover:shadow-[0_8px_30px_rgba(0,103,79,0.3)] focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 transition-all relative group overflow-hidden shadow-xl dark:shadow-none"
+            <GlitchWrapper>
+              <motion.div
+                whileHover={{ scale: 1.02 }}
+                whileTap={{ scale: 0.98 }}
+              >
+                <Link
+                  href={HERO_DATA.ctaPrimary.href}
+                  className="inline-block px-10 py-4.5 bg-foreground text-background text-[10px] font-black tracking-[0.2em] uppercase rounded-full hover:bg-primary hover:text-white hover:shadow-[0_8px_30px_rgba(0,103,79,0.3)] focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 transition-all relative group overflow-hidden shadow-xl dark:shadow-none"
+                  style={{ fontFamily: "var(--font-orbitron), sans-serif" }}
+                >
+                  <span className="relative z-10">{HERO_DATA.ctaPrimary.label}</span>
+                  <motion.div 
+                    className="absolute inset-0 bg-white/10 opacity-0 group-hover:opacity-100 transition-opacity"
+                  />
+                </Link>
+              </motion.div>
+            </GlitchWrapper>
+            
+            <GlitchWrapper>
+              <motion.button
+                whileHover={{ scale: 1.02 }}
+                whileTap={{ scale: 0.98 }}
+                onClick={() => document.getElementById('pillars')?.scrollIntoView({ behavior: 'smooth' })}
+                className="px-10 py-4.5 border-2 border-foreground/20 text-foreground text-[10px] font-black tracking-[0.2em] uppercase rounded-full hover:border-primary hover:text-primary focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 transition-all active:bg-primary/5"
                 style={{ fontFamily: "var(--font-orbitron), sans-serif" }}
               >
-                <span className="relative z-10">{HERO_DATA.ctaPrimary.label}</span>
-                <motion.div 
-                  className="absolute inset-0 bg-white/10 opacity-0 group-hover:opacity-100 transition-opacity"
-                />
-              </Link>
-            </motion.div>
-            <motion.button
-              whileHover={{ scale: 1.02 }}
-              whileTap={{ scale: 0.98 }}
-              onClick={() => document.getElementById('pillars')?.scrollIntoView({ behavior: 'smooth' })}
-              className="px-10 py-4.5 border-2 border-foreground/20 text-foreground text-[10px] font-black tracking-[0.2em] uppercase rounded-full hover:border-primary hover:text-primary focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 transition-all active:bg-primary/5"
-              style={{ fontFamily: "var(--font-orbitron), sans-serif" }}
-            >
-              {HERO_DATA.ctaSecondary.label}
-            </motion.button>
+                {HERO_DATA.ctaSecondary.label}
+              </motion.button>
+            </GlitchWrapper>
           </motion.div>
         </div>
 

@@ -1,11 +1,14 @@
 "use client";
 
 import { CanvasRevealEffect } from "@/components/ui/canvas-reveal-effect";
+import { GlitchWrapper } from "@/components/ui/glitch-wrapper";
+import { Skeleton } from "@/components/ui/skeleton";
 import { cn } from "@/lib/utils";
 import { Department, TeamMemberWithSkills } from "@/types/team";
 import { motion } from "framer-motion";
 import { Github, Linkedin, Mail } from "lucide-react";
 import Image from "next/image";
+import { useState } from "react";
 
 const departmentColors: Record<Department, { gradient: string; border: string; text: string; bg: string }> = {
   Leadership: {
@@ -44,8 +47,8 @@ export const TeamGrid = ({ members }: TeamGridProps) => {
   const committees = Array.from(new Set(members.map(m => m.committee || "2025"))).sort().reverse();
 
   return (
-    <section className="py-16 px-4 sm:px-6 lg:px-8">
-      <div className="max-w-7xl mx-auto space-y-20">
+    <section className="py-12 sm:py-16 px-4">
+      <div className="max-w-7xl mx-auto space-y-12 sm:space-y-20">
         {committees.map((committeeYear) => {
           const committeeMembers = members.filter(m => (m.committee || "2025") === committeeYear);
           
@@ -59,7 +62,7 @@ export const TeamGrid = ({ members }: TeamGridProps) => {
                 className="text-center"
               >
                 <h2
-                  className="text-4xl md:text-5xl font-black text-foreground mb-4"
+                  className="text-3xl sm:text-4xl md:text-5xl font-black text-foreground mb-4"
                   style={{ fontFamily: "var(--font-orbitron), sans-serif" }}
                 >
                   Executive Committee {committeeYear}
@@ -102,92 +105,84 @@ export const TeamGrid = ({ members }: TeamGridProps) => {
                               transition={{ delay: index * 0.05, duration: 0.5 }}
                               className="group relative w-full sm:w-[calc(50%-0.75rem)] md:w-[calc(33.33%-1rem)] lg:w-[calc(25%-1.125rem)] max-w-[280px]"
                             >
-                              {/* Card */}
-                              <div className={cn(
-                                "relative h-full bg-card rounded-2xl border transition-all duration-500 flex flex-col overflow-hidden",
-                                colors.border,
-                                "hover:shadow-2xl hover:shadow-primary/10 hover:-translate-y-1"
-                              )}>
-                                {/* Hover Background Overlay */}
+                              <GlitchWrapper className="w-full">
                                 <div className={cn(
-                                  "absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 bg-gradient-to-br",
-                                  colors.gradient
-                                )} />
-                                
-                                {/* Image container */}
-                                <div className="relative aspect-square overflow-hidden bg-muted/20">
-                                   <div className="absolute inset-0 z-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500">
-                                      <CanvasRevealEffect
-                                        animationSpeed={3}
-                                        containerClassName="bg-transparent"
-                                        colors={[
-                                           dept === "Leadership" ? [168, 85, 247] :
-                                           dept === "Technical" ? [59, 130, 246] :
-                                           dept === "Operations" ? [16, 185, 129] :
-                                           [249, 115, 22]
-                                        ]}
-                                        dotSize={2}
-                                      />
-                                   </div>
-                                  <Image
-                                    src={member.image_url || "/team/placeholder.jpg"}
-                                    alt={member.name}
-                                    fill
-                                    className="object-cover object-top transition-transform duration-700 group-hover:scale-110 relative z-10"
-                                  />
-                                  <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent z-20 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
-                                </div>
+                                  "relative h-full bg-card rounded-2xl border transition-all duration-500 flex flex-col overflow-hidden",
+                                  colors.border,
+                                  "hover:shadow-2xl hover:shadow-primary/10 hover:-translate-y-1"
+                                )}>
+                                  <div className={cn(
+                                    "absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 bg-gradient-to-br",
+                                    colors.gradient
+                                  )} />
+                                  
+                                  <div className="relative aspect-square overflow-hidden bg-muted/20">
+                                     <ImageLoader src={member.image_url || "/team/placeholder.jpg"} alt={member.name} />
+                                     
+                                     <div className="absolute inset-0 z-10 opacity-0 group-hover:opacity-100 transition-opacity duration-500">
+                                        <CanvasRevealEffect
+                                          animationSpeed={3}
+                                          containerClassName="bg-transparent"
+                                          colors={[
+                                             dept === "Leadership" ? [168, 85, 247] :
+                                             dept === "Technical" ? [59, 130, 246] :
+                                             dept === "Operations" ? [16, 185, 129] :
+                                             [249, 115, 22]
+                                          ]}
+                                          dotSize={2}
+                                        />
+                                     </div>
+                                    <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent z-20 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+                                  </div>
 
-                                {/* Content */}
-                                <div className="p-4 flex flex-col flex-grow text-center relative z-20">
-                                  <h4
-                                    className="text-base font-black text-foreground mb-1 tracking-tight"
-                                    style={{ fontFamily: "var(--font-orbitron), sans-serif" }}
-                                  >
-                                    {member.name}
-                                  </h4>
-                                  <p className={cn("text-xs font-bold mb-3 uppercase tracking-wider", colors.text)}>
-                                    {member.role}
-                                  </p>
+                                  <div className="p-4 flex flex-col flex-grow text-center relative z-20">
+                                    <h4
+                                      className="text-base font-black text-foreground mb-1 tracking-tight"
+                                      style={{ fontFamily: "var(--font-orbitron), sans-serif" }}
+                                    >
+                                      {member.name}
+                                    </h4>
+                                    <p className={cn("text-xs font-bold mb-3 uppercase tracking-wider", colors.text)}>
+                                      {member.role}
+                                    </p>
 
-                                  <p className="text-xs text-muted-foreground leading-relaxed mb-4 line-clamp-2">
-                                    {member.bio}
-                                  </p>
+                                    <p className="text-xs text-muted-foreground leading-relaxed mb-4 line-clamp-2">
+                                      {member.bio}
+                                    </p>
 
-                                  <div className="mt-auto space-y-4">
-                                    {/* Skills (Visual pill style) */}
-                                    <div className="flex flex-wrap justify-center gap-1.5">
-                                      {member.skills?.slice(0, 2).map((skill: string) => (
-                                        <span
-                                          key={skill}
-                                          className="px-2 py-0.5 text-[9px] font-bold uppercase bg-secondary/50 text-secondary-foreground rounded-full border border-border/50"
-                                        >
-                                          {skill}
-                                        </span>
-                                      ))}
-                                    </div>
+                                    <div className="mt-auto space-y-4">
+                                      <div className="flex flex-wrap justify-center gap-1.5">
+                                        {member.skills?.slice(0, 2).map((skill: string) => (
+                                          <span
+                                            key={skill}
+                                            className="px-2 py-0.5 text-[9px] font-bold uppercase bg-secondary/50 text-secondary-foreground rounded-full border border-border/50"
+                                          >
+                                            {skill}
+                                          </span>
+                                        ))}
+                                      </div>
 
-                                    {/* Social links */}
-                                    <div className="flex justify-center items-center gap-3 pt-3 border-t border-border/50">
-                                      {member.github_url && (
-                                        <a href={member.github_url} target="_blank" rel="noopener noreferrer" className="text-muted-foreground hover:text-primary transition-colors">
-                                          <Github className="w-4 h-4" />
-                                        </a>
-                                      )}
-                                      {member.linkedin_url && (
-                                        <a href={member.linkedin_url} target="_blank" rel="noopener noreferrer" className="text-muted-foreground hover:text-primary transition-colors">
-                                          <Linkedin className="w-4 h-4" />
-                                        </a>
-                                      )}
-                                      {member.email && (
-                                        <a href={`mailto:${member.email}`} className="text-muted-foreground hover:text-primary transition-colors">
-                                          <Mail className="w-4 h-4" />
-                                        </a>
-                                      )}
+                                      <div className="flex justify-center items-center gap-3 pt-3 border-t border-border/50">
+                                        {member.github_url && (
+                                          <a href={member.github_url} target="_blank" rel="noopener noreferrer" className="text-muted-foreground hover:text-primary transition-colors">
+                                            <Github className="w-4 h-4" />
+                                          </a>
+                                        )}
+                                        {member.linkedin_url && (
+                                          <a href={member.linkedin_url} target="_blank" rel="noopener noreferrer" className="text-muted-foreground hover:text-primary transition-colors">
+                                            <Linkedin className="w-4 h-4" />
+                                          </a>
+                                        )}
+                                        {member.email && (
+                                          <a href={`mailto:${member.email}`} className="text-muted-foreground hover:text-primary transition-colors">
+                                            <Mail className="w-4 h-4" />
+                                          </a>
+                                        )}
+                                      </div>
                                     </div>
                                   </div>
                                 </div>
-                              </div>
+                              </GlitchWrapper>
                             </motion.div>
                           );
                         })}
@@ -201,5 +196,24 @@ export const TeamGrid = ({ members }: TeamGridProps) => {
         })}
       </div>
     </section>
+  );
+};
+const ImageLoader = ({ src, alt }: { src: string; alt: string }) => {
+  const [isLoaded, setIsLoaded] = useState(false);
+
+  return (
+    <>
+      {!isLoaded && <Skeleton className="absolute inset-0 z-30" />}
+      <Image
+        src={src}
+        alt={alt}
+        fill
+        onLoad={() => setIsLoaded(true)}
+        className={cn(
+          "object-cover object-top transition-all duration-700 group-hover:scale-110 relative z-10",
+          isLoaded ? "opacity-100 scale-100" : "opacity-0 scale-105"
+        )}
+      />
+    </>
   );
 };
