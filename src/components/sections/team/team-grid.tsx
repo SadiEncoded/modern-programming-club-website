@@ -101,7 +101,7 @@ export const TeamGrid = ({ members }: TeamGridProps) => {
                               
                               {/* Mobile Layout (Horizontal Card) */}
                               <div className="block sm:hidden mb-3">
-                                <MobileTeamCard member={member} dept={dept} />
+                                <MobileTeamCard member={member} />
                               </div>
 
                               {/* Desktop Layout (Existing Vertical Card) */}
