@@ -16,7 +16,7 @@ const loadingSteps: LoadingStep[] = [
   { message: "> Synchronizing Algorithms...", minDuration: 150, maxDuration: 300 },
   { message: "> Loading Happy Face :) :)", minDuration: 100, maxDuration: 200 },
   { message: "> Finalizing system optimization...", minDuration: 100, maxDuration: 250 },
-  { message: "✓ Ready To Go, Stranger!", minDuration: 100, maxDuration: 200 },
+  { message: "✓ Ready To Go, Stranger!", minDuration: 400, maxDuration: 800 },
 ];
 
 export const TerminalLoader = () => {

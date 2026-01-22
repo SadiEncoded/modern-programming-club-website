@@ -107,6 +107,10 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
 
   return (
     <html lang="en" suppressHydrationWarning className="m-0 p-0 w-full overflow-x-hidden">
+      <head>
+        <link rel="preload" href="/sections/home/macBookHero.svg" as="image" type="image/svg+xml" />
+        <link rel="preload" href="/brand/text-logo.svg" as="image" type="image/svg+xml" />
+      </head>
       <ClientLayout fontClasses={fontClasses}>
         {children}
       </ClientLayout>

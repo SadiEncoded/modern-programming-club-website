@@ -40,4 +40,4 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 # local data (GDPR/Privacy - DO NOT COMMIT SENSITIVE INFO)
-src/lib/data/local-data.ts
+# src/lib/data/local-data.ts
