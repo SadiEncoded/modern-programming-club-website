@@ -4,9 +4,8 @@ import { CanvasRevealEffect } from "@/components/ui/canvas-reveal-effect";
 import { cn } from "@/lib/utils";
 import { Department, TeamMemberWithSkills } from "@/types/team";
 import { motion } from "framer-motion";
-import { ExternalLink, Github, Linkedin, Mail } from "lucide-react";
+import { Github, Linkedin, Mail } from "lucide-react";
 import Image from "next/image";
-import { useState } from "react";
 
 const departmentColors: Record<Department, { gradient: string; border: string; text: string; bg: string }> = {
   Leadership: {
@@ -41,212 +40,165 @@ interface TeamGridProps {
 }
 
 export const TeamGrid = ({ members }: TeamGridProps) => {
-  const [activeTab, setActiveTab] = useState("All");
-  const displayMembers = members;
+  // Group members by committee
+  const committees = Array.from(new Set(members.map(m => m.committee || "2025"))).sort().reverse();
 
   return (
     <section className="py-16 px-4 sm:px-6 lg:px-8">
-      <div className="max-w-7xl mx-auto">
-        {/* Section header */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          className="text-center mb-8"
-        >
-          <span className="text-xs font-black uppercase tracking-[0.3em] text-primary mb-4 block">
-            Core Team
-          </span>
-          <h2
-            className="text-3xl md:text-4xl font-black text-foreground"
-            style={{ fontFamily: "var(--font-orbitron), sans-serif" }}
-          >
-            Meet Our Leaders
-          </h2>
-        </motion.div>
+      <div className="max-w-7xl mx-auto space-y-20">
+        {committees.map((committeeYear) => {
+          const committeeMembers = members.filter(m => (m.committee || "2025") === committeeYear);
+          
+          return (
+            <div key={committeeYear} className="space-y-12">
+              {/* Committee Header */}
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                className="text-center"
+              >
+                <h2
+                  className="text-4xl md:text-5xl font-black text-foreground mb-4"
+                  style={{ fontFamily: "var(--font-orbitron), sans-serif" }}
+                >
+                  Executive Committee {committeeYear}
+                </h2>
+                <div className="h-1 w-24 bg-primary mx-auto rounded-full" />
+              </motion.div>
 
-        {/* Category Tabs */}
-        <div className="flex flex-wrap justify-center gap-2 mb-12">
-          {["All", "Leadership", "Technical", "Operations", "Design"].map((tab) => (
-            <button
-              key={tab}
-              onClick={() => setActiveTab(tab)}
-              className={cn(
-                "px-6 py-2 rounded-full text-xs font-bold uppercase tracking-wider transition-all duration-300 border",
-                activeTab === tab
-                  ? "bg-primary text-primary-foreground border-primary shadow-lg shadow-primary/25 scale-105"
-                  : "bg-muted/30 text-muted-foreground border-border hover:border-primary/50 hover:text-foreground"
-              )}
-              style={{ fontFamily: "var(--font-orbitron), sans-serif" }}
-            >
-              {tab}
-            </button>
-          ))}
-        </div>
+              {/* Department Sections within Committee */}
+              <div className="space-y-16">
+                {["Leadership", "Operations", "Design", "Technical"].map((dept) => {
+                  const deptMembers = committeeMembers.filter(m => m.department === dept);
+                  if (deptMembers.length === 0) return null;
 
-        {/* Team sections */}
-        <div className="space-y-12">
-          {["Leadership", "Operations", "Design", "Technical"].map((dept) => {
-            // Filter members for this department
-            // If activeTab is NOT "All", only show if it matches the active tab
-            if (activeTab !== "All" && activeTab !== dept) return null;
-
-            const deptMembers = displayMembers.filter(m => m.department === dept);
-            if (deptMembers.length === 0) return null;
-
-            return (
-              <div key={dept} className="space-y-6">
-                {/* Section Header (only if showing All) */}
-                {activeTab === "All" && (
-                  <motion.div
-                    initial={{ opacity: 0, x: -20 }}
-                    whileInView={{ opacity: 1, x: 0 }}
-                    viewport={{ once: true }}
-                    className="flex items-center gap-4"
-                  >
-                    <h2 className="text-2xl font-black text-foreground uppercase tracking-wider" style={{ fontFamily: "var(--font-orbitron), sans-serif" }}>
-                      {dept}
-                    </h2>
-                    <div className="h-px flex-1 bg-gradient-to-r from-border to-transparent" />
-                  </motion.div>
-                )}
-
-                <div className="flex flex-wrap justify-center gap-4">
-                  {deptMembers.map((member, index) => {
-                    const colors = departmentColors[member.department as Department];
-                    
-                    return (
+                  return (
+                    <div key={`${committeeYear}-${dept}`} className="space-y-8">
+                      {/* Department Header */}
                       <motion.div
-                        key={member.id || member.name}
-                        initial={{ opacity: 0, y: 30 }}
-                        whileInView={{ opacity: 1, y: 0 }}
+                        initial={{ opacity: 0, x: -20 }}
+                        whileInView={{ opacity: 1, x: 0 }}
                         viewport={{ once: true }}
-                        transition={{ delay: index * 0.1, duration: 0.5 }}
-                        className="group relative w-[calc(50%-0.5rem)] sm:w-[calc(33.33%-0.5rem)] lg:w-[calc(25%-0.75rem)]"
+                        className="flex items-center gap-4"
                       >
-                        {/* Card */}
-                        <div className={`relative h-full bg-card rounded-xl border ${colors.border} hover:border-current overflow-hidden transition-all duration-500 group-hover:${colors.text} flex flex-col`}>
-                          {/* Gradient overlay on hover */}
-                          <div className={`absolute inset-0 bg-gradient-to-br ${colors.gradient} opacity-0 group-hover:opacity-100 transition-opacity duration-500`} />
-                          
-                          {/* Image container - Clean style, no box */}
-                          <div className="relative aspect-[3/4] overflow-hidden bg-muted/20 group-hover/image:scale-100 transition-all duration-300">
-                             <div className="absolute inset-0 z-0 hidden group-hover:block transition-all duration-500">
-                                <CanvasRevealEffect
-                                  animationSpeed={3}
-                                  containerClassName="bg-transparent"
-                                  colors={[
-                                     dept === "Leadership" ? [168, 85, 247] :
-                                     dept === "Technical" ? [59, 130, 246] :
-                                     dept === "Operations" ? [16, 185, 129] :
-                                     [249, 115, 22]
-                                  ]}
-                                  dotSize={2}
-                                />
-                             </div>
-                            <div className="absolute inset-0 bg-gradient-to-t from-card via-transparent to-transparent z-10" />
-                            <Image
-                              src={member.image_url || "/team/placeholder.jpg"}
-                              alt={member.name}
-                              fill
-                              className="object-cover object-top group-hover:scale-105 transition-transform duration-700 relative z-20"
-                            />
-                            
-                            {/* Department badge */}
-                            <div className={`absolute top-2 right-2 z-20 px-2 py-0.5 rounded-full ${colors.bg} backdrop-blur-md border ${colors.border} shadow-sm`}>
-                              <span className={`text-[8px] font-black uppercase tracking-wider ${colors.text}`}>
-                                {member.department}
-                              </span>
-                            </div>
-                          </div>
-
-                          {/* Content */}
-                          <div className="relative z-10 p-3 flex flex-col flex-grow text-center">
-                            {/* Name & Role */}
-                            <h3
-                              className="text-sm font-black text-foreground mb-0.5 tracking-tight"
-                              style={{ fontFamily: "var(--font-orbitron), sans-serif" }}
-                            >
-                              {member.name}
-                            </h3>
-                            <p className={`text-[10px] font-bold mb-2 ${colors.text} uppercase tracking-wide`}>
-                              {member.role}
-                            </p>
-
-                            {/* Bio */}
-                            <p className="text-[10px] text-muted-foreground leading-relaxed mb-3 font-medium line-clamp-2">
-                              {member.bio}
-                            </p>
-
-                            <div className="mt-auto">
-                              {/* Skills */}
-                              <div className="flex flex-wrap justify-center gap-1 mb-2">
-                                {member.skills?.slice(0, 3).map((skill: string) => (
-                                  <span
-                                    key={skill}
-                                    className="px-1.5 py-0.5 text-[8px] font-bold uppercase tracking-wider bg-muted/50 text-muted-foreground rounded border border-border/50"
-                                  >
-                                    {skill}
-                                  </span>
-                                ))}
-                              </div>
-
-                              {/* Social links */}
-                              <div className="flex justify-center items-center gap-1.5 pt-2 border-t border-border/50">
-                                {member.github_url && (
-                                  <a
-                                    href={member.github_url}
-                                    target="_blank"
-                                    rel="noopener noreferrer"
-                                    className="p-1.5 rounded-full hover:bg-muted transition-colors group/icon border border-transparent hover:border-border"
-                                    aria-label="GitHub"
-                                  >
-                                    <Github className="w-3 h-3 text-muted-foreground group-hover/icon:text-foreground transition-colors" />
-                                  </a>
-                                )}
-                                {member.linkedin_url && (
-                                  <a
-                                    href={member.linkedin_url}
-                                    target="_blank"
-                                    rel="noopener noreferrer"
-                                    className="p-1.5 rounded-full hover:bg-muted transition-colors group/icon border border-transparent hover:border-border"
-                                    aria-label="LinkedIn"
-                                  >
-                                    <Linkedin className="w-3 h-3 text-muted-foreground group-hover/icon:text-foreground transition-colors" />
-                                  </a>
-                                )}
-                                {member.email && (
-                                  <a
-                                    href={`mailto:${member.email}`}
-                                    className="p-1.5 rounded-full hover:bg-muted transition-colors group/icon border border-transparent hover:border-border"
-                                    aria-label="Email"
-                                  >
-                                    <Mail className="w-3 h-3 text-muted-foreground group-hover/icon:text-foreground transition-colors" />
-                                  </a>
-                                )}
-                                {member.website_url && (
-                                  <a
-                                    href={member.website_url}
-                                    target="_blank"
-                                    rel="noopener noreferrer"
-                                    className="p-1.5 rounded-full hover:bg-muted transition-colors group/icon border border-transparent hover:border-border"
-                                    aria-label="Website"
-                                  >
-                                    <ExternalLink className="w-3 h-3 text-muted-foreground group-hover/icon:text-foreground transition-colors" />
-                                  </a>
-                                )}
-                              </div>
-                            </div>
-                          </div>
-                        </div>
+                        <h3 className="text-xl font-black text-foreground uppercase tracking-widest" style={{ fontFamily: "var(--font-orbitron), sans-serif" }}>
+                          {dept}
+                        </h3>
+                        <div className="h-px flex-1 bg-gradient-to-r from-border to-transparent" />
                       </motion.div>
-                    );
-                  })}
-                </div>
+
+                      {/* Members Grid */}
+                      <div className="flex flex-wrap justify-center gap-6">
+                        {deptMembers.map((member, index) => {
+                          const colors = departmentColors[member.department as Department];
+                          
+                          return (
+                            <motion.div
+                              key={member.id || member.name}
+                              initial={{ opacity: 0, y: 30 }}
+                              whileInView={{ opacity: 1, y: 0 }}
+                              viewport={{ once: true }}
+                              transition={{ delay: index * 0.05, duration: 0.5 }}
+                              className="group relative w-full sm:w-[calc(50%-0.75rem)] md:w-[calc(33.33%-1rem)] lg:w-[calc(25%-1.125rem)] max-w-[280px]"
+                            >
+                              {/* Card */}
+                              <div className={cn(
+                                "relative h-full bg-card rounded-2xl border transition-all duration-500 flex flex-col overflow-hidden",
+                                colors.border,
+                                "hover:shadow-2xl hover:shadow-primary/10 hover:-translate-y-1"
+                              )}>
+                                {/* Hover Background Overlay */}
+                                <div className={cn(
+                                  "absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 bg-gradient-to-br",
+                                  colors.gradient
+                                )} />
+                                
+                                {/* Image container */}
+                                <div className="relative aspect-square overflow-hidden bg-muted/20">
+                                   <div className="absolute inset-0 z-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500">
+                                      <CanvasRevealEffect
+                                        animationSpeed={3}
+                                        containerClassName="bg-transparent"
+                                        colors={[
+                                           dept === "Leadership" ? [168, 85, 247] :
+                                           dept === "Technical" ? [59, 130, 246] :
+                                           dept === "Operations" ? [16, 185, 129] :
+                                           [249, 115, 22]
+                                        ]}
+                                        dotSize={2}
+                                      />
+                                   </div>
+                                  <Image
+                                    src={member.image_url || "/team/placeholder.jpg"}
+                                    alt={member.name}
+                                    fill
+                                    className="object-cover object-top transition-transform duration-700 group-hover:scale-110 relative z-10"
+                                  />
+                                  <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent z-20 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+                                </div>
+
+                                {/* Content */}
+                                <div className="p-4 flex flex-col flex-grow text-center relative z-20">
+                                  <h4
+                                    className="text-base font-black text-foreground mb-1 tracking-tight"
+                                    style={{ fontFamily: "var(--font-orbitron), sans-serif" }}
+                                  >
+                                    {member.name}
+                                  </h4>
+                                  <p className={cn("text-xs font-bold mb-3 uppercase tracking-wider", colors.text)}>
+                                    {member.role}
+                                  </p>
+
+                                  <p className="text-xs text-muted-foreground leading-relaxed mb-4 line-clamp-2">
+                                    {member.bio}
+                                  </p>
+
+                                  <div className="mt-auto space-y-4">
+                                    {/* Skills (Visual pill style) */}
+                                    <div className="flex flex-wrap justify-center gap-1.5">
+                                      {member.skills?.slice(0, 2).map((skill: string) => (
+                                        <span
+                                          key={skill}
+                                          className="px-2 py-0.5 text-[9px] font-bold uppercase bg-secondary/50 text-secondary-foreground rounded-full border border-border/50"
+                                        >
+                                          {skill}
+                                        </span>
+                                      ))}
+                                    </div>
+
+                                    {/* Social links */}
+                                    <div className="flex justify-center items-center gap-3 pt-3 border-t border-border/50">
+                                      {member.github_url && (
+                                        <a href={member.github_url} target="_blank" rel="noopener noreferrer" className="text-muted-foreground hover:text-primary transition-colors">
+                                          <Github className="w-4 h-4" />
+                                        </a>
+                                      )}
+                                      {member.linkedin_url && (
+                                        <a href={member.linkedin_url} target="_blank" rel="noopener noreferrer" className="text-muted-foreground hover:text-primary transition-colors">
+                                          <Linkedin className="w-4 h-4" />
+                                        </a>
+                                      )}
+                                      {member.email && (
+                                        <a href={`mailto:${member.email}`} className="text-muted-foreground hover:text-primary transition-colors">
+                                          <Mail className="w-4 h-4" />
+                                        </a>
+                                      )}
+                                    </div>
+                                  </div>
+                                </div>
+                              </div>
+                            </motion.div>
+                          );
+                        })}
+                      </div>
+                    </div>
+                  );
+                })}
               </div>
-            );
-          })}
-        </div>
+            </div>
+          );
+        })}
       </div>
     </section>
   );

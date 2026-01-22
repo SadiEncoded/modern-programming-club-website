@@ -5,6 +5,7 @@ import { NAVIGATION } from "@/lib/constants";
 import { cn } from "@/lib/utils";
 import { motion } from "framer-motion";
 import { Bell, Menu, X } from "lucide-react";
+import { useTheme } from "next-themes";
 import Image from "next/image";
 import Link from "next/link";
 import { useEffect, useState } from "react";
@@ -12,12 +13,22 @@ import { useEffect, useState } from "react";
 export const SiteHeader = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
+  const { theme, resolvedTheme } = useTheme();
+  const [mounted, setMounted] = useState(false);
 
   useEffect(() => {
+    const timer = setTimeout(() => setMounted(true), 0);
     const onScroll = () => setIsScrolled(window.scrollY > 20);
     window.addEventListener("scroll", onScroll);
-    return () => window.removeEventListener("scroll", onScroll);
+    return () => {
+      clearTimeout(timer);
+      window.removeEventListener("scroll", onScroll);
+    };
   }, []);
+
+  const logoSrc = mounted && (theme === "dark" || resolvedTheme === "dark") 
+    ? "/brand/icon(darkVersion).svg" 
+    : "/brand/icon(lightVersion).svg";
 
   return (
     <header
@@ -30,22 +41,23 @@ export const SiteHeader = () => {
     >
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-20 relative transition-all duration-300">
-          {/* Left Design Pattern - Far Left */}
-          {/* Left Design Pattern - Far Left */}
-          <Link href="/" className="hidden lg:block relative w-20 h-10 ml-2 shrink-0 opacity-80 hover:opacity-100 transition-opacity">
-            <Image
-              src="/sections/shared/header-left-accent.svg"
-              alt="DICPC Home"
-              fill
-              className="object-contain"
-            />
-          </Link>
+          {/* Left Design Pattern - Desktop */}
+          <div className="hidden lg:flex items-center gap-4">
+            <Link href="/" className="relative w-20 h-10 shrink-0 opacity-80 hover:opacity-100 transition-opacity">
+              <Image
+                src="/sections/shared/header-left-accent.svg"
+                alt="DICPC Home"
+                fill
+                className="object-contain"
+              />
+            </Link>
+          </div>
 
           {/* Logo - Visible on mobile/tablet */}
           <Link href="/" className="lg:hidden flex items-center space-x-2 group">
             <div className="relative">
               <Image
-                src="/brand/icon.svg"
+                src={logoSrc}
                 alt="DICPC logo"
                 width={300}
                 height={300}

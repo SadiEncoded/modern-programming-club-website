@@ -13,6 +13,7 @@ CREATE TABLE team_members (
   linkedin_url TEXT,
   website_url TEXT,
   is_active BOOLEAN DEFAULT true,
+  committee VARCHAR(50) DEFAULT '2025',
   display_order INTEGER DEFAULT 0,
   created_at TIMESTAMP WITH TIME ZONE DEFAULT NOW(),
   updated_at TIMESTAMP WITH TIME ZONE DEFAULT NOW()

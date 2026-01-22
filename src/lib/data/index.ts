@@ -52,6 +52,7 @@ const transformMember = (row: any): Member => ({
   image_url: row.image_url || "", // Already mapped from avatar_url in view
   email: row.email || "",
   is_active: row.is_active ?? true,
+  committee: row.committee || "2025",
   display_order: row.display_order ?? 0,
   created_at: row.created_at || "",
   updated_at: row.updated_at || "",

@@ -4,7 +4,7 @@ type ContainerProps = React.HTMLAttributes<HTMLDivElement>;
 
 export const Container = ({ className, ...props }: ContainerProps) => (
   <div
-    className={cn("w-full m-0 p-0", className)}
+    className={cn("max-w-7xl mx-auto px-4 sm:px-6 lg:px-8", className)}
     {...props}
   />
 );

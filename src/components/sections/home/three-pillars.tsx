@@ -25,7 +25,7 @@ export const ThreePillars = () => {
         </div>
       <div className="absolute inset-0 pointer-events-none">
         <DottedGlowBackground 
-          color={isDark ? "rgba(255,255,255,0.1)" : "rgba(0, 97, 74, 0.06)"}
+          color={isDark ? "rgba(255,255,255,0.12)" : "rgba(0, 97, 74, 0.15)"}
           glowColor={isDark ? "rgba(48, 229, 143, 0.4)" : "rgba(48, 229, 143, 0.2)"}
         />
       </div>

@@ -27,6 +27,7 @@ interface PixelImageProps {
   pixelFadeInDuration?: number // in ms
   maxAnimationDelay?: number // in ms
   colorRevealDelay?: number // in ms
+  loading?: "lazy" | "eager" // Add loading prop for lazy loading support
 }
 
 export const PixelImage = ({
@@ -39,6 +40,7 @@ export const PixelImage = ({
   customGrid,
   className,
   imgClassName,
+  loading = "eager", // Default to eager loading
 }: PixelImageProps & { className?: string; imgClassName?: string }) => {
   const [isVisible, _setIsVisible] = useState(true)
   const [showColor, setShowColor] = useState(false)
@@ -111,6 +113,7 @@ export const PixelImage = ({
           <img
             src={src}
             alt={`Pixel image piece ${index + 1}`}
+            loading={loading}
             className={cn(
               "w-full h-full z-1 object-cover",
               grayscaleAnimation && (showColor ? "grayscale-0" : "grayscale"),

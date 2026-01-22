@@ -1,64 +1,68 @@
 "use client";
 
-import { useCallback, useEffect, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 
-interface TechTextProps {
+interface TechTextProps extends React.HTMLAttributes<HTMLSpanElement> {
   text: string;
   className?: string;
   glitchInterval?: number;
   scrambleSpeed?: number;
 }
 
+const CHARS = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789!@#$%^&*()_+-=[]{}|;:,.<>?/";
+
 export const TechText = ({ 
   text, 
   className = "", 
   glitchInterval = 3000, 
-  scrambleSpeed = 50 
+  scrambleSpeed = 40,
+  ...props
 }: TechTextProps) => {
   const [displayText, setDisplayText] = useState(text);
-  const [isGlitching, setIsGlitching] = useState(false);
-
-  const chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789!@#$%^&*()_+-=[]{}|;:,.<>?/";
+  const isGlitching = useRef(false);
+  const intervalRef = useRef<NodeJS.Timeout | null>(null);
 
   const scramble = useCallback(() => {
+    if (isGlitching.current) return;
+    isGlitching.current = true;
+    
     let iteration = 0;
-    const interval = setInterval(() => {
-      setDisplayText((prev) => 
-        prev
-          .split("")
-          .map((char, index) => {
-            if (index < iteration) {
-              return text[index];
-            }
-            return chars[Math.floor(Math.random() * chars.length)];
-          })
-          .join("")
-      );
+    const textLen = text.length;
+    
+    if (intervalRef.current) clearInterval(intervalRef.current);
+    
+    intervalRef.current = setInterval(() => {
+      setDisplayText(() => {
+        let result = "";
+        for (let i = 0; i < textLen; i++) {
+          if (i < iteration) {
+            result += text[i];
+          } else {
+            result += CHARS[Math.floor(Math.random() * CHARS.length)];
+          }
+        }
+        return result;
+      });
 
-      if (iteration >= text.length) {
-        clearInterval(interval);
-        setIsGlitching(false);
+      if (iteration >= textLen) {
+        if (intervalRef.current) clearInterval(intervalRef.current);
+        isGlitching.current = false;
       }
 
-      iteration += 1 / 3;
+      iteration += 1 / 2; // Slightly faster for smoothness
     }, scrambleSpeed);
-
-    return () => clearInterval(interval);
-  }, [text, chars, scrambleSpeed]);
+  }, [text, scrambleSpeed]);
 
   useEffect(() => {
-    const trigger = setInterval(() => {
-      if (!isGlitching) {
-        setIsGlitching(true);
-        scramble();
-      }
-    }, glitchInterval);
-
-    return () => clearInterval(trigger);
-  }, [glitchInterval, isGlitching, scramble]);
+    const trigger = setInterval(scramble, glitchInterval);
+    return () => {
+      clearInterval(trigger);
+      if (intervalRef.current) clearInterval(intervalRef.current);
+    };
+  }, [glitchInterval, scramble]);
 
   return (
-    <span className={className}>
+    <span className={className} {...props}>
       {displayText}
     </span>
   );

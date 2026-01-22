@@ -3,9 +3,6 @@ import type { Metadata } from "next";
 import { Bruno_Ace, Geist, Orbitron } from "next/font/google";
 import "./globals.css";
 
-import { SiteFooter } from "@/components/footer/site-footer";
-import { SiteHeader } from "@/components/header/site-header";
-import { ThemeProvider } from "@/components/shared/theme-provider";
 
 const geist = Geist({
   variable: "--font-geist-sans",
@@ -103,28 +100,16 @@ export const metadata: Metadata = {
   },
 };
 
+import { ClientLayout } from "@/components/shared/client-layout";
+
 export default function RootLayout({ children }: { children: React.ReactNode }) {
+  const fontClasses = `${geist.variable} ${orbitron.variable} ${brunoAce.variable}`;
+
   return (
     <html lang="en" suppressHydrationWarning className="m-0 p-0 w-full overflow-x-hidden">
-      <body
-        className={`${geist.variable} ${orbitron.variable} ${brunoAce.variable} font-sans antialiased text-foreground bg-background`}
-      >
-        <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
-          <div className="flex flex-col min-h-screen">
-            
-            {/* Header */}
-            <SiteHeader />
-
-            {/* MAIN */}
-            <main className="flex-1">
-              {children}
-            </main>
-
-            {/* Footer - no padding/margin */}
-            <SiteFooter />
-          </div>
-        </ThemeProvider>
-      </body>
+      <ClientLayout fontClasses={fontClasses}>
+        {children}
+      </ClientLayout>
     </html>
   );
 }

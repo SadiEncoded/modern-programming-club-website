@@ -3,12 +3,55 @@
 
 @custom-variant dark (&:is(.dark *));
 
+html {
+  scroll-padding-top: 80px; /* Offset for sticky header */
+}
+
+/* Lenis smooth scroll adjustments */
+html.lenis, html.lenis body {
+  height: auto;
+}
+
+.lenis.lenis-smooth {
+  scroll-behavior: auto !important;
+}
+
+.lenis.lenis-smooth [data-lenis-prevent] {
+  overscroll-behavior: contain;
+}
+
+.lenis.lenis-stopped {
+  overflow: hidden;
+}
+
+.lenis.lenis-scrolling iframe {
+  pointer-events: none;
+}
+
 html, body {
   margin: 0;
   padding: 0;
   width: 100%;
   overflow-x: hidden;
+  position: relative;
+  /* Premium scrollbar */
+  scrollbar-width: thin;
+  scrollbar-color: var(--primary) transparent;
 }
+
+::-webkit-scrollbar {
+  width: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: var(--primary);
+  border-radius: 20px;
+}
+
 
 /* THEME VARIABLES */
 :root {
@@ -142,13 +185,69 @@ html, body {
   --radius-3xl: calc(var(--radius) + 12px);
   --radius-4xl: calc(var(--radius) + 16px);
   @keyframes grid {
-  0% {
-    transform: translateY(-50%);
+    0% {
+      transform: translateY(-50%);
     }
-  100% {
-    transform: translateY(0);
+    100% {
+      transform: translateY(0);
     }
   }
+
+  @keyframes scanline {
+    0% {
+      transform: translateY(-100%);
+    }
+    100% {
+      transform: translateY(100%);
+    }
+  }
+
+  @keyframes terminal-flicker {
+    0% { opacity: 0.97; }
+    5% { opacity: 0.95; }
+    10% { opacity: 0.9; }
+    15% { opacity: 0.93; }
+    20% { opacity: 0.98; }
+    25% { opacity: 0.95; }
+    30% { opacity: 0.99; }
+    70% { opacity: 0.98; }
+    72% { opacity: 0.95; }
+    77% { opacity: 0.99; }
+    80% { opacity: 0.94; }
+    85% { opacity: 0.98; }
+    90% { opacity: 0.93; }
+    95% { opacity: 0.99; }
+    100% { opacity: 0.98; }
+  }
+
+  @keyframes terminal-glow {
+    0%, 100% { text-shadow: 0 0 4px rgba(48, 229, 143, 0.5), 0 0 8px rgba(48, 229, 143, 0.2); }
+    50% { text-shadow: 0 0 10px rgba(48, 229, 143, 0.8), 0 0 20px rgba(48, 229, 143, 0.4); }
+  }
+
+  @keyframes fade-in {
+    from { opacity: 0; }
+    to { opacity: 1; }
+  }
+
+  @keyframes logo-pulse {
+    0%, 100% { 
+      filter: drop-shadow(0 0 10px rgba(48, 229, 143, 0.4));
+      opacity: 0.9;
+    }
+    50% { 
+      filter: drop-shadow(0 0 25px rgba(48, 229, 143, 0.7));
+      opacity: 1;
+    }
+  }
+}
+
+.scanline {
+  will-change: transform;
+}
+
+.terminal-frame {
+  will-change: opacity;
 }
 
 @keyframes ripple {

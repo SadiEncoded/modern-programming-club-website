@@ -27,6 +27,7 @@ export type Member = {
   skills: string[];
   email: string;
   is_active: boolean;
+  committee: string;
   display_order: number;
   created_at: string;
   updated_at: string;
@@ -78,79 +79,40 @@ export type BlogPost = {
 
 export const events: Event[] = [
   {
-    id: "1",
-    title: "Example Event",
-    description: "This is a placeholder description for an event.",
+    id: "example-1",
+    title: "Example Title",
+    description: "Example description.",
     date: "2026-01-01",
     bannerUrl: "/sections/shared/bg-pattern.svg",
     mode: "offline",
-    location: "Campus Auditorium",
-  },
+    location: "Example Location",
+  }
 ];
 
 export const members: Member[] = [
   {
     id: "1",
-    name: "John Doe",
-    role: "President",
+    name: "Member Name",
+    role: "Role",
     department: "Leadership",
-    image_url: "/team/placeholder.jpg",
-    bio: "Placeholder bio for the president.",
-    skills: ["Leadership", "Example"],
-    email: "john.doe@example.com",
+    image_url: "/people/team/executive-2025/president.svg",
+    bio: "Bio description.",
+    skills: ["Skill"],
+    email: "email@example.com",
     is_active: true,
+    committee: "2025",
     display_order: 1,
-    created_at: "",
-    updated_at: "",
-    semester: "4th",
-    phone: "017XXXXXXXX",
+    created_at: new Date().toISOString(),
+    updated_at: new Date().toISOString(),
+    semester: "1st Semester",
+    phone: null,
     github_url: null,
     linkedin_url: null,
     website_url: null
-  },
+  }
 ];
 
-export const achievements: Achievement[] = [
-  {
-    id: "a1",
-    title: "Example Achievement",
-    description: "Description of a significant achievement.",
-    imageUrl: "/sections/shared/bg-pattern.svg",
-    date: "2024-01-01",
-    category: "general",
-  },
-];
-
-export const projects: Project[] = [
-  {
-    id: "p1",
-    title: "Example Project",
-    description: "A placeholder project description.",
-    githubLink: "#",
-    previewImage: "/sections/shared/bg-pattern.svg",
-    techStack: ["Next.js"],
-    members: ["1"],
-  },
-];
-
-export const resources: Resource[] = [
-  {
-    id: "r1",
-    title: "Example Resource",
-    description: "A placeholder resource link.",
-    category: "Guides",
-    link: "#",
-  },
-];
-
-export const blogPosts: BlogPost[] = [
-  {
-    id: "b1",
-    title: "Example Blog Post",
-    slug: "example-post",
-    coverImage: "/sections/shared/bg-pattern.svg",
-    excerpt: "Placeholder excerpt for a blog post.",
-    author: "Admin",
-    createdAt: "2024-01-01",
-  },
-];
+export const achievements: Achievement[] = [];
+export const projects: Project[] = [];
+export const resources: Resource[] = [];
+export const blogPosts: BlogPost[] = [];
