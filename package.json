@@ -6,7 +6,8 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "eslint"
+    "lint": "eslint",
+    "postinstall": "node -e \"const fs=require('fs'); if(!fs.existsSync('src/lib/data/local-data.ts')) fs.copyFileSync('src/lib/data/local-data.example.ts', 'src/lib/data/local-data.ts')\""
   },
   "dependencies": {
     "@hookform/resolvers": "^5.2.2",
