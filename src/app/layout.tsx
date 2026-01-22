@@ -43,7 +43,7 @@ export const metadata: Metadata = {
     "Bangladesh Tech",
   ],
 
-  metadataBase: new URL("https://dicpc.club"),
+  metadataBase: new URL("https://dicpc.vercel.app"),
 
   alternates: {
     canonical: "/",
